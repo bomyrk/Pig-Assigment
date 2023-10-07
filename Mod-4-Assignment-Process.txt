@@ -1,0 +1,18 @@
+1.Save the code as a Java file (e.g., WordFrequency.java).
+2.Compile the Java file using the following command or use eclipse to generate jar file:
+javac -cp pig.jar WordFrequency.java
+
+where pig.jar is the Pig library. 
+3. Register the UDF in your Pig script using the following command:
+
+REGISTER 'WordFrequency.jar';
+DEFINE WordFrequency WordFrequency();
+
+where WordFrequency.jar is the compiled Java file. 
+4. Use the UDF in your Pig script as follows:
+
+A = LOAD 'Documents/Shakespeare.txt' AS (line:chararray);
+B = FOREACH A GENERATE WordFrequency(line);
+DUMP B;
+
+where input.txt is your input text document.
